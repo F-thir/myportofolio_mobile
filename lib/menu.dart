@@ -9,7 +9,7 @@ class MyHomePage extends StatelessWidget {
 
   final List<ItemHomepage> items = [
     ItemHomepage("Lihat Proyek", Icons.folder, Colors.red),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green ),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
     ItemHomepage("Logout", Icons.logout, Colors.blue),
   ];
 
@@ -74,6 +74,22 @@ class MyHomePage extends StatelessWidget {
                       return ItemCard(item);
                     }).toList(),
                   ),
+
+                  // Menampilkan hello card
+                  // Grid kedua: 3 kolom, hanya kolom tengah yang berisi HelloCard.
+                  GridView.count(
+                    primary: true,
+                    padding: const EdgeInsets.symmetric(horizontal: 20),
+                    crossAxisSpacing: 10,
+                    crossAxisCount: 3,
+                    childAspectRatio: 10,
+                    shrinkWrap: true,
+                    children: const [
+                      SizedBox(),
+                      HelloCard("Fathir"),
+                      SizedBox(),
+                    ],
+                  ),
                 ],
               ),
             ),
@@ -95,6 +111,7 @@ class InfoCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return Card(
       // Memberikan efek bayangan kartu elevasi 2 unit.
+      color: Colors.amber,
       elevation: 2.0,
       child: Container(
         // Menyesuaikan lebar kartu dengan proporsi layar (dibagi 3.5).
@@ -105,10 +122,13 @@ class InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold),
+              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
             ),
             const SizedBox(height: 8.0),
-            Text(content),
+            Text(
+              content,
+              style: const TextStyle(color: Colors.black)
+              ),
           ],
         ),
       ),
@@ -120,24 +140,36 @@ class ItemHomepage {
   final String name;
   final IconData icon;
   final Color color;
+  final Color colorHoverText;
 
-  ItemHomepage(this.name, this.icon, this.color);
+  ItemHomepage(this.name, this.icon, this.color, {this.colorHoverText = Colors.yellowAccent});
 }
 
-class ItemCard extends StatelessWidget {
+class ItemCard extends StatefulWidget {
   final ItemHomepage item;
 
   const ItemCard(this.item, {super.key});
 
   @override
+  State<ItemCard> createState() => _ItemCardState();
+}
+
+class _ItemCardState extends State<ItemCard> {
+  bool _isHovered = false;
+
+  @override
   Widget build(BuildContext context) {
+    final item = widget.item;
+    final Color contentColor = _isHovered ? item.colorHoverText : Colors.white;
+
     return Material(
       color: item.color,
       borderRadius: BorderRadius.circular(12),
       child: InkWell(
+        // Aksi ketika kartu dihover oleh pengguna.
+        onHover: (hovering) => setState(() => _isHovered = hovering),
         // Aksi ketika kartu ditekan oleh pengguna.
         onTap: () {
-          // Menampilkan SnackBar dengan pesan interaktif.
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
             ..showSnackBar(
@@ -151,15 +183,55 @@ class ItemCard extends StatelessWidget {
               mainAxisAlignment: MainAxisAlignment.center,
               children: [
                 Icon(
-                  item.icon,
-                  color: Colors.white,
-                  size: 30.0,
+                  item.icon, 
+                  color: contentColor, 
+                  size: 30.0
                 ),
                 const Padding(padding: EdgeInsets.all(3)),
                 Text(
                   item.name,
                   textAlign: TextAlign.center,
-                  style: const TextStyle(color: Colors.white),
+                  style: TextStyle(color: contentColor),
+                ),
+              ],
+            ),
+          ),
+        ),
+      ),
+    );
+  }
+}
+
+class HelloCard extends StatelessWidget {
+  final String name;
+
+  const HelloCard(this.name, {super.key});
+
+  @override
+  Widget build(BuildContext context) {
+    return Material(
+      color: Colors.amber,
+      borderRadius: BorderRadius.circular(12),
+      child: InkWell(
+        // Aksi ketika kartu ditekan oleh pengguna.
+        onTap: () {
+          ScaffoldMessenger.of(context)
+            ..hideCurrentSnackBar()
+            ..showSnackBar(
+              SnackBar(content: Text("Halo $name!"))
+            );
+        },
+        child: Container(
+          padding: const EdgeInsets.all(8),
+          child: Center(
+            child: Column(
+              mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                const Padding(padding: EdgeInsets.all(3)),
+                Text(
+                  name,
+                  textAlign: TextAlign.center,
+                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
                 ),
               ],
             ),

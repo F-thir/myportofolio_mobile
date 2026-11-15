@@ -24,8 +24,10 @@ Class : PBP F
     - Warna hijau untuk "Tambah Proyek"
     - Warna biru untuk "Logout"
 - (Note: Sebagian besar sudah dilaksanakan pada tutorial 8.)
-
-
+- Creativity:
+    - New OnHover effect pada masing-masing tombol aksi (StatefulWidget)
+    - Experimenting color palette
+    - New HelloCard to say "Hello User!"
 
 ## == PERTANYAAN REFLEKTIF - TUGAS 6 ==
 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
