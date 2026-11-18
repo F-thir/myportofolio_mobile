@@ -33,6 +33,7 @@ Class : PBP F
 
 > Tutorial 9
 - Finished Tutorial 9
+- Typo commit
 
 ## == PERTANYAAN REFLEKTIF - TUGAS 6 ==
 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
