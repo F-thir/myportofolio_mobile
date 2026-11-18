@@ -31,6 +31,9 @@ Class : PBP F
 - Pertanyaan Reflektif
 - Deklarasi AI
 
+> Tutorial 9
+- Finished Tutorial 9
+
 ## == PERTANYAAN REFLEKTIF - TUGAS 6 ==
 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
 2. Sebutkan semua widget yang kamu gunakan dalam proyek ini dan jelaskan fungsinya masing-masing!
