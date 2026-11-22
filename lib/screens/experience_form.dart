@@ -77,6 +77,9 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   if (value == null || value.trim().isEmpty) {
                     return "Nama experience tidak boleh kosong!";
                   }
+                  if (value.trim().length > 100) {
+                    return "Nama experience maksimal 100 karakter!";
+                  }
                   return null;
                 },
               ),
@@ -106,6 +109,12 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                 validator: (String? value) {
                   if (value == null || value.trim().isEmpty) {
                     return "Deskripsi experience tidak boleh kosong!";
+                  }
+                  if (value.trim().length < 10) {
+                    return "Deskripsi minimal 10 karakter!";
+                  }
+                  if (value.trim().length > 500) {
+                    return "Deskripsi maksimal 500 karakter!";
                   }
                   return null;
                 },
@@ -199,6 +208,19 @@ class _ExperienceFormPageState extends State<ExperienceFormPage> {
                   setState(() {
                     _experienceLink = value!;
                   });
+                },
+                validator: (String? value) {
+                  final link = value?.trim() ?? "";
+
+                  // Opsional (kosong boleh)
+                  if (link.isEmpty) return null;
+
+                  final uri = Uri.tryParse(link);
+                  final isValid = uri != null && (uri.isScheme('http') || uri.isScheme('https')) && uri.host.isNotEmpty;
+                  if (!isValid) {
+                    return "Format URL tidak valid (Ex: https://example.com)";
+                  }
+                  return null;
                 },
               ),
             ),

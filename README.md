@@ -43,6 +43,7 @@ Class : PBP F
   - Experience Timeline (Wajib)
   - Experience Link (Opsional)
 - Added new "Add Experience" option to Drawer
+- Added new Validator for "Experience" and "Project" Form
 - Redesign Menu
   - Adding New Button ("Tambah Experience", "Lihat Experience", "Login")
   - Adjust the position of all buttons
