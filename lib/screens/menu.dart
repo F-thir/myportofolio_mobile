@@ -9,10 +9,19 @@ class MyHomePage extends StatelessWidget {
   final String nama = "Fathir Azka Dillafah";
   final String kelas = "PBP F";
 
-  final List<ItemHomepage> items = [
-    ItemHomepage("Lihat Proyek", Icons.folder, Colors.red),
-    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.green),
-    ItemHomepage("Logout", Icons.logout, Colors.blue),
+  final List<ItemHomepage> projectItems = [
+    ItemHomepage("Lihat Proyek", Icons.folder, Colors.blue),
+    ItemHomepage("Tambah Proyek", Icons.add_circle, Colors.orange),
+  ];
+
+  final List<ItemHomepage> experienceItems = [
+    ItemHomepage("Lihat Experience", Icons.work, Colors.blue),
+    ItemHomepage("Tambah Experience", Icons.account_tree_outlined, Colors.orange),
+  ];
+
+  final List<ItemHomepage> sessionItems = [
+    ItemHomepage("Login", Icons.login, Colors.red),
+    ItemHomepage("Logout", Icons.logout, Colors.red),
   ];
 
   @override
@@ -33,71 +42,122 @@ class MyHomePage extends StatelessWidget {
       drawer: const LeftDrawer(),
 
       // Body halaman utama dengan padding di sekelilingnya.
-      body: Padding(
-        padding: const EdgeInsets.all(16.0),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.center,
-          children: [
-            // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
-            Row(
-              mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-              children: [
-                InfoCard(title: 'NPM', content: npm),
-                InfoCard(title: 'Name', content: nama),
-                InfoCard(title: 'Class', content: kelas),
-              ],
-            ),
-
-            const SizedBox(height: 16.0),
-
-            // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
-            Center(
-              child: Column(
+      body: SingleChildScrollView(
+        child: Padding(
+          padding: const EdgeInsets.all(16.0),
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: [
+              // Baris horizontal untuk menampilkan 3 InfoCard secara sejajar.
+              Row(
+                mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                 children: [
-                  const Padding(
-                    padding: EdgeInsets.only(top: 16.0),
-                    child: Text(
-                      'Selamat datang di MyPortfolio Mobile!',
-                      style: TextStyle(
-                        fontWeight: FontWeight.bold,
-                        fontSize: 18.0,
-                      ),
-                    ),
-                  ),
-
-                  // GridView menampilkan kartu tombol dalam tata letak kisi 3 kolom.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.all(20),
-                    crossAxisSpacing: 10,
-                    mainAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    // shrinkWrap agar ukuran kisi menyesuaikan tinggi konten anak.
-                    shrinkWrap: true,
-                    children: items.map((ItemHomepage item) {
-                      return ItemCard(item);
-                    }).toList(),
-                  ),
-
-                  // Menampilkan hello card
-                  // Grid kedua: 3 kolom, hanya kolom tengah yang berisi HelloCard.
-                  GridView.count(
-                    primary: true,
-                    padding: const EdgeInsets.symmetric(horizontal: 20),
-                    crossAxisSpacing: 10,
-                    crossAxisCount: 3,
-                    childAspectRatio: 10,
-                    shrinkWrap: true,
-                    children: const [
-                      SizedBox(),
-                      HelloCard("Fathir"),
-                      SizedBox(),
-                    ],
-                  ),
+                  InfoCard(title: 'NPM', content: npm),
+                  InfoCard(title: 'Name', content: nama),
+                  InfoCard(title: 'Class', content: kelas),
                 ],
               ),
-            ),
-          ],
+
+              const SizedBox(height: 16.0),
+
+              // Bagian tengah: pesan sambutan dan kisi tombol menu portofolio.
+              Center(
+                child: Column(
+                  children: [
+                    const Padding(
+                      padding: EdgeInsets.only(top: 16.0),
+                      child: Text(
+                        'Selamat datang di MyPortfolio Mobile!',
+                        style: TextStyle(
+                          fontWeight: FontWeight.bold,
+                          fontSize: 18.0,
+                        ),
+                      ),
+                    ),
+
+                    // === Proyek ===
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20, top: 8),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Proyek', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    GridView.count(
+                      primary: true,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 5,
+                      shrinkWrap: true,
+                      children: projectItems.map((ItemHomepage item) {
+                        return ItemCard(item);
+                      }).toList(),
+                    ),
+
+                    // === Experience ===
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Experience', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    GridView.count(
+                      primary: true,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 5,
+                      shrinkWrap: true,
+                      children: experienceItems.map((ItemHomepage item) {
+                        return ItemCard(item);
+                      }).toList(),
+                    ),
+
+                    // === Sesi ===
+                    const Padding(
+                      padding: EdgeInsets.only(left: 20),
+                      child: Align(
+                        alignment: Alignment.centerLeft,
+                        child: Text('Sesi', style: TextStyle(fontWeight: FontWeight.bold)),
+                      ),
+                    ),
+                    GridView.count(
+                      primary: true,
+                      padding: const EdgeInsets.all(20),
+                      crossAxisSpacing: 10,
+                      mainAxisSpacing: 10,
+                      crossAxisCount: 2,
+                      childAspectRatio: 5,
+                      shrinkWrap: true,
+                      children: sessionItems.map((ItemHomepage item) {
+                        return ItemCard(item);
+                      }).toList(),
+                    ),
+
+                    // Menampilkan hello card
+                    // Grid kedua: 3 kolom, hanya kolom tengah yang berisi HelloCard.
+                    GridView.count(
+                      primary: true,
+                      padding: const EdgeInsets.symmetric(horizontal: 20),
+                      crossAxisSpacing: 10,
+                      crossAxisCount: 3,
+                      childAspectRatio: 10,
+                      shrinkWrap: true,
+                      children: const [
+                        SizedBox(),
+                        HelloCard("Fathir"),
+                        SizedBox(),
+                      ],
+                    ),
+                  ],
+                ),
+              ),
+            ],
+          ),
         ),
       ),
     );

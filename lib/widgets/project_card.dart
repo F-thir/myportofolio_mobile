@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
-import 'package:myportofolio_mobile/screens/menu.dart';
 import 'package:myportofolio_mobile/screens/project_form.dart';
+import 'package:myportofolio_mobile/screens/experience_form.dart';
 
 class ItemHomepage {
   final String name;
@@ -42,6 +42,7 @@ class _ItemCardState extends State<ItemCard> {
               SnackBar(content: Text("Kamu telah menekan tombol ${item.name}!"))
             );
           // Area responsif terhadap sentuhan
+          
           // Navigate ke halaman yang sesuai
           if (item.name == "Tambah Proyek") {
             Navigator.push(
@@ -51,7 +52,17 @@ class _ItemCardState extends State<ItemCard> {
               ),
             );
           }
+
+          else if (item.name == "Tambah Experience") {
+            Navigator.push(
+              context,
+              MaterialPageRoute(
+                builder: (context) => const ExperienceFormPage(),
+              ),
+            );
+          }
         },
+
         child: Container(
           padding: const EdgeInsets.all(8),
           child: Center(
