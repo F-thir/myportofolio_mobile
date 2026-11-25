@@ -51,6 +51,9 @@ Class : PBP F
   - Adjust button size
 - (Note: The updates include creativity)
 
+> Tutorial 10
+- Finished Tutorial 10
+
 ## == PERTANYAAN REFLEKTIF - TUGAS 7 ==
 1. Jelaskan apa yang dimaksud dengan widget tree pada Flutter dan bagaimana hubungan induk-anak (parent-child) bekerja antar-widget!
 2. Sebutkan semua widget yang kamu gunakan dalam proyek ini dan jelaskan fungsinya masing-masing!

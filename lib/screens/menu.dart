@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:myportofolio_mobile/widgets/left_drawer.dart';
 import 'package:myportofolio_mobile/widgets/project_card.dart';
+import 'package:myportofolio_mobile/services/auth_state.dart';
+import 'package:provider/provider.dart';
 
 class MyHomePage extends StatelessWidget {
   MyHomePage({super.key});
@@ -16,26 +18,30 @@ class MyHomePage extends StatelessWidget {
 
   final List<ItemHomepage> experienceItems = [
     ItemHomepage("Lihat Experience", Icons.work, Colors.blue),
-    ItemHomepage("Tambah Experience", Icons.account_tree_outlined, Colors.orange),
-  ];
-
-  final List<ItemHomepage> sessionItems = [
-    ItemHomepage("Login", Icons.login, Colors.red),
-    ItemHomepage("Logout", Icons.logout, Colors.red),
+    ItemHomepage(
+      "Tambah Experience",
+      Icons.account_tree_outlined,
+      Colors.orange,
+    ),
   ];
 
   @override
   Widget build(BuildContext context) {
     // Scaffold menyediakan struktur visual dasar halaman (AppBar, Body, SnackBar).
+    final isLoggedIn = context.watch<AuthState>().isLoggedIn;
+
+    final List<ItemHomepage> sessionItems = [
+      if (!isLoggedIn) ItemHomepage("Login", Icons.login, Colors.red),
+
+      if (isLoggedIn) ItemHomepage("Logout", Icons.logout, Colors.red),
+    ];
+
     return Scaffold(
       // AppBar menampilkan bar bagian atas halaman aplikasi.
       appBar: AppBar(
         title: const Text(
           'MyPortfolio',
-          style: TextStyle(
-            color: Colors.white,
-            fontWeight: FontWeight.bold,
-          ),
+          style: TextStyle(color: Colors.white, fontWeight: FontWeight.bold),
         ),
         backgroundColor: Theme.of(context).colorScheme.primary,
       ),
@@ -80,7 +86,10 @@ class MyHomePage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 20, top: 8),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Proyek', style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          'Proyek',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     GridView.count(
@@ -101,7 +110,10 @@ class MyHomePage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 20),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Experience', style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          'Experience',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     GridView.count(
@@ -122,7 +134,10 @@ class MyHomePage extends StatelessWidget {
                       padding: EdgeInsets.only(left: 20),
                       child: Align(
                         alignment: Alignment.centerLeft,
-                        child: Text('Sesi', style: TextStyle(fontWeight: FontWeight.bold)),
+                        child: Text(
+                          'Sesi',
+                          style: TextStyle(fontWeight: FontWeight.bold),
+                        ),
                       ),
                     ),
                     GridView.count(
@@ -186,13 +201,13 @@ class InfoCard extends StatelessWidget {
           children: [
             Text(
               title,
-              style: const TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+              style: const TextStyle(
+                fontWeight: FontWeight.bold,
+                color: Colors.black,
+              ),
             ),
             const SizedBox(height: 8.0),
-            Text(
-              content,
-              style: const TextStyle(color: Colors.black)
-              ),
+            Text(content, style: const TextStyle(color: Colors.black)),
           ],
         ),
       ),
@@ -215,9 +230,7 @@ class HelloCard extends StatelessWidget {
         onTap: () {
           ScaffoldMessenger.of(context)
             ..hideCurrentSnackBar()
-            ..showSnackBar(
-              SnackBar(content: Text("Halo $name!"))
-            );
+            ..showSnackBar(SnackBar(content: Text("Halo $name!")));
         },
         child: Container(
           padding: const EdgeInsets.all(8),
@@ -229,7 +242,10 @@ class HelloCard extends StatelessWidget {
                 Text(
                   name,
                   textAlign: TextAlign.center,
-                  style: TextStyle(fontWeight: FontWeight.bold, color: Colors.black),
+                  style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black,
+                  ),
                 ),
               ],
             ),
