@@ -5,8 +5,9 @@ import 'package:myportofolio_mobile/main.dart';
 import 'package:myportofolio_mobile/services/api_client.dart';
 
 void main() {
-  testWidgets('App builds and shows the home page',
-      (WidgetTester tester) async {
+  testWidgets('App builds and shows the home page', (
+    WidgetTester tester,
+  ) async {
     final apiClient = ApiClient(
       client: MockClient((request) async => http.Response('[]', 200)),
     );
